@@ -12,6 +12,7 @@ const requireAuth = async (req, res, next) => {
             return res.status(401).json({ error: 'Authorization token required' });
         }
 
+        //token split method
         const token = authorization.split(' ')[1];
         if (!token) {
             console.error('Authorization token missing');
