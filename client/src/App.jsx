@@ -17,6 +17,7 @@ import NavbarOther from './components/navba/navbarOther.jsx'
 
 function App() {
   const { user } = useAuthContext()
+  
 
   return (
     <BrowserRouter>
@@ -26,8 +27,11 @@ function App() {
         <Route path='/login' element={!user ? <Login /> : <Navigate to="/" />} />
         <Route path='/register' element={!user ? <Register /> : <Navigate to="/" />} />
         <Route path='/shop' element={<Shop />} />
-        <Route path='/admin-dashboard' element={user?.isAdmin ? <AdminDashboard /> : <Navigate to="/login" />} />
         <Route path='/feature' element={<Feature />} />
+        <Route
+          path="/admin-dashboard"
+          element={user?.user?.role === "admin" ? <AdminDashboard /> : <Navigate to="/login" />}
+        />
         <Route path='/contact' element={<Contact />} />
         <Route path='/products' element={<Products />} />
         <Route path='/productsUpdate/:id' element={<ProductsUpdate />} />

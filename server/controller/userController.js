@@ -38,10 +38,12 @@ const registerUser = async (req, res) => {
             return res.status(400).json({ success: false, message: 'Email already in use.' });
         }
 
+         
+       
         const salt = await bcrypt.genSalt(10);
         const hashPassword = await bcrypt.hash(password, salt);
 
-        const newUser = new User({ email, password: hashPassword });
+        const newUser = new User({ email, password: hashPassword,role:'user' });
         const user = await newUser.save();
 
         const token = createToken(user._id);
@@ -56,7 +58,7 @@ const registerUser = async (req, res) => {
         .json({
             success: true,
             message: 'Registration successful',
-            user: { id: user._id, email: user.email },
+            user: { id: user._id, email: user.email , role:user.role},
             token
         });
     } catch (error) {
@@ -111,6 +113,7 @@ const loginUser = async (req, res) => {
     user: {
         id: user._id,
         email: user.email,
+        role:user.role
     },
     token
 });

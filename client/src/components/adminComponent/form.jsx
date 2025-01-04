@@ -8,7 +8,7 @@ function form({ formData, handleFormChange }) {
             <label className="block text-gray-600 font-medium mb-1" htmlFor="productName">
               Product Name
             </label>
-            <input
+            <input  
               type="text"
               id="productName"
               value={formData.productName}

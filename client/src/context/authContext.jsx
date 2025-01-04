@@ -22,8 +22,9 @@ export const AuthContextProvider = ({ children }) => {
     // Fetch user data when the component mounts
   useEffect(() => {
     const fetchUser = async () => {
+      console.log("local storage",localStorage)
       const storedUser = JSON.parse(localStorage.getItem("user")); // Simulating a stored user fetch
-      console.log("Stored user from localStorage:", storedUser); // Debug here
+     
       if (storedUser) {
         setUser(storedUser); // Set the user if found
       }

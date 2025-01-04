@@ -5,6 +5,7 @@ import { useLogout } from '../../hook/useLogout';
 import { useNavigate } from 'react-router-dom';
 import { useOrderPlacement } from "../../hook/useOrderPlacement"
 import { useAuthContext } from "../../hook/useAuthContext"
+import axios from 'axios';
 
 
 
@@ -25,10 +26,27 @@ function UserProfile() {
       navigate('/'); 
   };
 
- 
+  //handle delete
+  const handleDelete = (id) => {
+    if (window.confirm('Are you sure you want to delete this order?')) {
+      axios
+        .delete(`http://localhost:5000/api/order/delete/${id}`, {
+          headers: { 
+            'Authorization': `Bearer ${user.token}`,
+            'Content-Type': 'application/json',
+          },
+        })
+        .then((res) => {
+          console.log('Delete successful:', res);
+          setOrders((prevOrders) => prevOrders.filter((order) => order._id !== id));
+        })
+        .catch((err) => console.error('Error deleting the order:', err));
+    }
+  };
+  
 
 
-
+//fetching ordr list for user
   useEffect(() => {
     const fetchWorkouts = async () => {
       
@@ -145,6 +163,12 @@ function UserProfile() {
             <p className="text-gray-700 font-semibold">Status: Delivered</p>
             <p className="text-gray-600">Total: {result.productPrice}/=</p>
             <button className="mt-2 text-sm text-blue-500 hover:underline">View Details</button>
+           <br /> <button
+                className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 text-sm rounded-lg"
+                onClick={() => handleDelete(result._id)} // Add your delete logic
+              >
+                cancel
+              </button>
           </div>
         </div>
       );

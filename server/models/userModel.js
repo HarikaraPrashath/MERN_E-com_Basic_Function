@@ -12,6 +12,10 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
+    role:{
+        type:String,
+        require:true
+    }
 
     // Remove confirmPassword from the schema
 });

@@ -11,7 +11,7 @@ const requireAuth = async (req, res, next) => {
             console.error('Authorization header missing or improperly formatted');
             return res.status(401).json({ error: 'Authorization token required' });
         }
-
+ 
         //token split method
         const token = authorization.split(' ')[1];
         if (!token) {
