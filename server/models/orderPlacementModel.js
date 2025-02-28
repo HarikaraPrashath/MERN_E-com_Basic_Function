@@ -4,19 +4,19 @@ const Schema = mongoose.Schema;
 const orderPlacementSchema = new Schema(
     {
         cardNumber: {
-            type: Number,
+            type: String,
             required: true,
         },
         yearMonth: {
-            type: Number,
+            type: String,
             required: true,
         },
         cnn: {
-            type: Number,
+            type: String,
             required: true,
         },
         price: {
-            type: Number,
+            type: String,
             required: true,
         },
         visaMasterCard: {
@@ -30,6 +30,10 @@ const orderPlacementSchema = new Schema(
         productPrice:{
             type: String,
             required: true,
+        },
+        productImage:{
+            type: String,
+            required: false,
         },
         user_id: {
             type: String,

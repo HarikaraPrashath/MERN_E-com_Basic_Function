@@ -11,6 +11,9 @@ export const useLogout =()=>{
 
       //dispatch logout action
       dispatch({type:'LOGOUT'})
+      setTimeout(() => {
+        window.location.reload();
+    }, 200);
   }
  return{logout}
 }

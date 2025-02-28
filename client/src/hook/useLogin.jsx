@@ -24,7 +24,8 @@ const login = async(email,password) =>{
 
     if(!response.ok){
         setIsLoading(false)
-        setError(json.error)
+        setError(json.message)
+        return { success: false, error: json.message };
     }
 
 
@@ -37,6 +38,11 @@ const login = async(email,password) =>{
 
         //update
         setIsLoading(false)
+
+        setTimeout(() => {
+          window.location.reload(); // Refresh the page to apply the changes
+        }, 500);
+
     }
 }
 

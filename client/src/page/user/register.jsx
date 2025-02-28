@@ -1,23 +1,29 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useRegister } from '../../hook/useRegister';
-
+import { Toaster, toast } from 'react-hot-toast'; 
 
 function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const { register, isLoading, error } = useRegister();
+  const { register, error } = useRegister();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  console.log("Form submitted with: ", { email, password, confirmPassword });
-  await register(email, password,confirmPassword);
+    const response = await register(email, password,confirmPassword);
+  
+      if (response?.success) {
+        toast.success("Register successful!");
+      } else {
+        toast.error(error || "Register failed. Please try again.");
+      }
   };
 
   return (
    <div>
+     <Toaster position="top-right" reverseOrder={false} /> 
      <div className="flex items-center justify-center h-screen bg-gray-200">
       <div className="bg-green-800 p-8 rounded-lg shadow-lg w-96">
         <h2 className="text-3xl font-bold text-white text-center mb-6">Register</h2>

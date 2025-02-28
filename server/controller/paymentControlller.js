@@ -4,10 +4,10 @@ const Payment = require('../models/orderPlacementModel.js');
 const makePaymentOrder = async (req, res) => {
     try {
         console.log('Request body:', req.body); // Debug log to inspect incoming data
-        const { cardNumber, yearMonth, cnn, price, visaMasterCard ,productName,productPrice} = req.body;
+        const { cardNumber, yearMonth, cnn, price, visaMasterCard ,productName, productImage,productPrice} = req.body;
 
         // Validate required fields
-        if (!cardNumber || !yearMonth || !cnn || !price || !visaMasterCard ||!productName ||!productPrice) {
+        if (!cardNumber || !yearMonth || !cnn || !price || !visaMasterCard ||!productName ||!productImage ||!productPrice) {
             return res.status(400).json({ error: 'All fields are required' });
         }
 
@@ -34,7 +34,7 @@ const makePaymentOrder = async (req, res) => {
             return res.status(400).json({ error: 'User ID not found in request' });
         }
 
-        const payment = new Payment({ cardNumber, yearMonth, cnn, price, visaMasterCard,productName,productPrice, user_id });
+        const payment = new Payment({ cardNumber, yearMonth, cnn, price, productImage, visaMasterCard,productName,productPrice, user_id });
         await payment.save();
 
         res.status(201).json({ success: true, payment });

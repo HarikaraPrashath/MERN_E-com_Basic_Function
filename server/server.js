@@ -9,6 +9,7 @@ const mongoose = require('mongoose');
 const userRoutes = require('./routes/userRoute')
 const adminProduct = require('./routes/admin/productRoutes')
 const paymentOrder = require('./routes/paymentandOrderRoutes')
+const userDetails = require('./routes/userDetailsRoutes')
 
 // express app
 const app = express();
@@ -28,6 +29,7 @@ app.use(express.json());
 app.use('/api/users', userRoutes);
 app.use('/api/admin/product', adminProduct);
 app.use('/api/order', paymentOrder);
+app.use('/api/details', userDetails);
 
 
 // connect to DB
